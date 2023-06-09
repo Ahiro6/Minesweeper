@@ -1,0 +1,38 @@
+.block {
+    width: 100%;
+    height: 100%;
+}
+
+.block div {
+    width: 100%;
+    width: 100%;
+}
+
+.block div button {
+    width: 100%;
+    width: 100%;
+}
+
+.block .after {
+    background-color: rgb(109, 64, 214);
+    width: 100%;
+    height: 100%;
+}
+
+.block .before {
+    background-color: rgb(109, 64, 214);
+    width: 100%;
+    height: 100%;
+}
+
+.block .bomb {
+    background-color: rgb(109, 64, 214);
+    width: 100%;
+    height: 100%;
+}
+
+.block .flag {
+    background-color: rgb(109, 64, 214);
+    width: 100%;
+    height: 100%;
+}
