@@ -1,21 +1,24 @@
-.field {
-  min-width: 10em;
-  max-width: 30em;
+:root {
+  --f-size: 1em;
+  --w: 30em;
+  --h: 30em;
+  --block-size: 2em;
+}
 
+.field {
   display: flex;
   overflow: auto;
-  justify-items: start;
-  align-content: start;
-  justify-content: start;
+  justify-items: stretch;
+  align-content: space-between;
+  justify-content: space-around;
   margin: auto;
   background-color: #312929;
-  padding: 0.5em;
-  flex-basis: 0%;
-  position: static;
-  grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  padding: 0.75rem;
+
   flex-wrap: wrap;
   align-items: stretch;
   flex-direction: row;
+  font-size: var(--f-size);
+  width: calc(var(--w)*2);
+  height: calc(var(--h)*2);
 }

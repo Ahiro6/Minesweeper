@@ -12,40 +12,29 @@ const Game = () => {
 
     const easyBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        setLevel("easy")
+        setLevel(1)
     }
 
     const medBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        setLevel("medium")
+        setLevel(2)
     }
 
     const hardBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        setLevel("hard")
+        setLevel(4)
     }
 
 
-    const [level, setLevel] = useState("easy");
+    const [level, setLevel] = useState(1);
     const [row, setRow] = useState(5)
     const [column, setColumn] = useState(5)
 
     const field: number[][] = generateField(row, column, [3, 3]); 
 
     useEffect(() => {
-        if(level == "easy") {
-            setRow(5)
-            setColumn(5)
-        }
-        else if(level == "medium") {
-            setRow(10)
-            setColumn(10)
-        }
-        else if(level == "hard") {
-            setRow(15)
-            setColumn(15)
-        }
-
+        setRow(level*5)
+        setColumn(level*5)
     }, [level])
 
     return (

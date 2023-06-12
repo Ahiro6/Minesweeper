@@ -27,7 +27,7 @@ export const Field = ({ row, column, field }: FieldProps) => {
         return blockArr
     }   
 
-    return <div className={Field_module.field}>
+    return <div className={Field_module.field} style={{ '--w': `${column}em`, '--h': `${row}`}}>
         { 
             blockCreate(row, column, field)
         }
