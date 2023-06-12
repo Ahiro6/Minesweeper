@@ -1,44 +1,39 @@
-.Squares {
-  display: inline-block;
-  width: 3em;
-  height: 3em;
-  border: 0px solid black;
-  background-color: #4c5fd7;
+:root {
+  --h: 2em;
+  --w: 2em;
 }
 
-.Squares div button {
+.Squares {
+  display: inline-block;
+  margin: 0;
+  padding: 0em;
+  flex-grow: 0;
+  width: var(--w);
+  height: var(--h);
+}
+
+.Squares div {
   width: 100%;
   height: 100%;
-  border: none;
-  border-radius: 0px;
-  background: none;
-  padding: 0em;
-  font-size: 2em;
-  font-weight: 600;
-  font-style: normal;
-  color: rgba(255, 255, 255, 1);
+  font-size: 0rem;
+  text-align: center;
+  color: aliceblue;
+  font-size: 1em;
 }
 
 .Squares .start {
-  width: 100%;
-  height: 100%;
-  background: none;
+  background-color: #4c5fd7;
+  padding: 0em;
 }
 
 .Squares .flagged {
-  width: 100%;
-  height: 100%;
   background-color: #afa5c0;
 }
 
 .Squares .cleared {
-  width: 100%;
-  height: 100%;
   background-color: black;
 }
 
 .Squares .bomb {
-  width: 100%;
-  height: 100%;
   background-color: red;
 }

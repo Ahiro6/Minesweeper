@@ -1,19 +1,21 @@
-.root {
-}
 .field {
-  align-self: end;
-  order: -2;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 0px;
+  min-width: 10em;
+  max-width: 30em;
+
+  display: flex;
+  overflow: auto;
+  justify-items: start;
   align-content: start;
   justify-content: start;
-  flex-direction: row;
+  margin: auto;
+  background-color: #312929;
+  padding: 0.5em;
+  flex-basis: 0%;
+  position: static;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   flex-wrap: wrap;
-  align-items: start;
-  display: block;
-  width: 15em;
-  height: 15em;
-  overflow: hidden;
-  justify-items: baseline;
+  align-items: stretch;
+  flex-direction: row;
 }

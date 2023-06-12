@@ -3,21 +3,21 @@ import Block_module from './Block.module.scss';
 import Classnames from 'classnames';
 
 const Block = (props: { count: number; pos: string[] }): JSX.Element => {
-    const [cleared, setCleared] = useState(true);
+    const [cleared, setCleared] = useState(false);
     const [flagged, setFlagged] = useState(false);
 
     const isBomb: boolean = props.count >= 10;
+    const h = "10em"
 
-    const style = 
-        cleared
-            ? isBomb
-                ? Block_module.bomb
-                : Block_module.cleared
-            : flagged
-                ? Block_module.flagged
-                : Block_module.start;
+    const style = cleared
+        ? isBomb
+            ? Block_module.bomb
+            : Block_module.cleared
+        : flagged
+        ? Block_module.flagged
+        : Block_module.start;
 
-    const btnCleared = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btnCleared = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         setCleared(true);
     };
@@ -33,11 +33,9 @@ const Block = (props: { count: number; pos: string[] }): JSX.Element => {
     }, [cleared]);
 
     return (
-        <div onContextMenu={btnFlagged} className={Block_module.Squares}>
+        <div onContextMenu={btnFlagged} onClick={btnCleared} className={Block_module.Squares}>
             <div className={style}>
-                <button value={props.pos} onClick={btnCleared} disabled={flagged}>
-                    {cleared && !isBomb ? props.count : ''}
-                </button>
+                {(cleared && !isBomb) ? props.count : 'B'}
             </div>
         </div>
     );

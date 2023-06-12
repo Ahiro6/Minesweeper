@@ -1,25 +1,25 @@
-import classNames from 'classnames';
+
 import Block from '../block/Block';
-import styles from './field.module.scss';
+import Field_module from './field.module.scss';
 
 export interface FieldProps {
-    className?: string;
     row?: number;
     column?: number;
+    field?: number[][];
 }
 
 /**
  * This component was created using Codux's Default new component template.
  * To create custom component templates, see https://help.codux.com/kb/en/article/kb16522
  */
-export const Field = ({ className, row, column }: FieldProps) => {
+export const Field = ({ row, column, field }: FieldProps) => {
 
-    const blockCreate = (row: number, column: number): JSX.Element[] => {
+    const blockCreate = (row: number, column: number, field: number[][]): JSX.Element[] => {
 
         const blockArr: JSX.Element[] = []
         for (let i = 0; i < row; i++) {
             for(let j = 0; j < column; j++) {
-                const newBlock: JSX.Element = <Block count={0} pos={[`${i}`, `${j}`]}/>
+                const newBlock: JSX.Element = <Block count={field[i][j]} pos={[`${i}`, `${j}`]}/>
                 blockArr.push(newBlock)
             }
         }
@@ -27,9 +27,9 @@ export const Field = ({ className, row, column }: FieldProps) => {
         return blockArr
     }   
 
-    return <div className={classNames(styles.root, className)}>
+    return <div className={Field_module.field}>
         { 
-            blockCreate(row, column)
+            blockCreate(row, column, field)
         }
     </div>;
 };

@@ -1,0 +1,29 @@
+.board {
+  padding: 0.5em;
+  background-color: #3f3ff8;
+  align-self: start;
+  align-content: start;
+  justify-content: start;
+}
+.game {
+  width: 100%;
+  height: 100%;
+}
+.board-top {
+  background-color: #7987e6;
+  padding: 0em 0em 1em;
+}
+.mode_btn {
+}
+.modes_panel {
+  display: flex;
+  align-self: start;
+  align-items: start;
+  justify-items: start;
+  align-content: start;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #5f4898;
+  padding: 1em;
+}
