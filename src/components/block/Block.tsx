@@ -18,8 +18,10 @@ const Block = (props: { count: number; pos: string[] }): JSX.Element => {
         : Block_module.start;
 
     const btnCleared = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        setCleared(true);
+        if(!flagged) {
+            e.preventDefault();
+            setCleared(true);
+        }
     };
 
     const btnFlagged = (e: React.MouseEvent<HTMLDivElement>) => {
