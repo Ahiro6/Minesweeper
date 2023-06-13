@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Block_module from './Block.module.scss';
 import Classnames from 'classnames';
+import { block } from '../../js/gameplay';
 
-const Block = (props: { count: number; pos: string[] }): JSX.Element => {
-    const [cleared, setCleared] = useState(false);
-    const [flagged, setFlagged] = useState(false);
+const Block = (props: { block: block, setClicked:  React.Dispatch<React.SetStateAction<block>> }): JSX.Element => {
+    const [cleared, setCleared] = useState(props.block.cleared);
+    const [flagged, setFlagged] = useState(props.block.flagged);
 
-    const isBomb: boolean = props.count >= 10;
-    const h = "10em"
+    const isBomb: boolean = props.block.count >= 10;
 
     const style = cleared
         ? isBomb
@@ -20,6 +20,7 @@ const Block = (props: { count: number; pos: string[] }): JSX.Element => {
     const btnCleared = (e: React.MouseEvent<HTMLDivElement>) => {
         if(!flagged) {
             e.preventDefault();
+            props.setClicked(props.block)
             setCleared(true);
         }
     };
@@ -30,14 +31,13 @@ const Block = (props: { count: number; pos: string[] }): JSX.Element => {
     };
 
     useEffect(() => {
-        if (isBomb && cleared) {
-        }
-    }, [cleared]);
+
+    }, []);
 
     return (
         <div onContextMenu={btnFlagged} onClick={btnCleared} className={Block_module.Squares}>
             <div className={style}>
-                {(cleared && !isBomb) ? props.count : 'B'}
+                {(cleared && !isBomb) ? props.block.count : 'B'}
             </div>
         </div>
     );

@@ -1,3 +1,10 @@
+export interface block {
+    pos: number[];
+    count: number;
+    flagged: boolean;
+    cleared: boolean
+}
+
 const generateMines = (count:number, row:number, column:number, clicked:number[]): number[][] => {
     let minePos: number[][] = [[
         Math.floor(Math.random()*row), 
@@ -79,53 +86,52 @@ const generateMines = (count:number, row:number, column:number, clicked:number[]
     return minePos
 }
 
-export const baseField = (row:number, column:number): number[][] => {
-    let field: number[][] = []; 
+export const baseField = (row:number, column:number): block[][] => {
+
+    
+    let field: block[][] = [
+    ]; 
 
     for(let i = 0; i<row; i++) {
         field.push([])
         for(let j = 0; j<column; j++) {
-            field[i].push(0)
+            field[i].push({pos: [i, j], count: 0, flagged:false, cleared: false})
         }
     }
 
     return field
 }
 
-const injectMinesInField = (field:number[][], minePos:number[][]): number[][] => {
+const injectMinesInField = (field:block[][], minePos:number[][]): block[][] => {
     for(let pos of minePos) {
-        field[pos[0]][pos[1]] = 10
+        field[pos[0]][pos[1]].count = 10
 
         if(pos[0] != 0) {
-            field[pos[0]-1][pos[1]-1] += 1
-            field[pos[0]-1][pos[1]] += 1
-            field[pos[0]-1][pos[1]+1] += 1
+            field[pos[0]-1][pos[1]-1].count += 1
+            field[pos[0]-1][pos[1]].count += 1
+            field[pos[0]-1][pos[1]+1].count += 1
         }
 
-        field[pos[0]][pos[1]-1] += 1
-        field[pos[0]][pos[1]+1] += 1
+        field[pos[0]][pos[1]-1].count += 1
+        field[pos[0]][pos[1]+1].count += 1
 
         if(pos[0] != field.length-1) {
-            field[pos[0]+1][pos[1]-1] += 1
-            field[pos[0]+1][pos[1]] += 1
-            field[pos[0]+1][pos[1]+1] += 1
+            field[pos[0]+1][pos[1]-1].count += 1
+            field[pos[0]+1][pos[1]].count += 1
+            field[pos[0]+1][pos[1]+1].count += 1
         }
     }
 
     return field
 }
 
-export const generateField = (row: number, column: number, clicked:number[]): number[][]  => {
+export const generateField = (field:block[][], clicked:number[]): block[][]  => {
+    const row = field.length
+    const column = field[0].length
     const mineCount: number = Math.ceil((row * column)/4)
     const minePos:number[][] = generateMines(mineCount, row, column, clicked)
 
-    let field: number[][] = baseField(row, column)
-
     field = injectMinesInField(field, minePos)
-
-    console.log("Field", field)
-    //console.log("Test", field[5][3])
-    console.log("Mines", minePos)
 
     return field
 }
