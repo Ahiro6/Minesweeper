@@ -7,6 +7,10 @@ import { block } from '../../js/gameplay';
  * This component was created using Codux's Default new component template.
  * To create custom component templates, see https://help.codux.com/kb/en/article/kb16522
  */
+interface CSSProperties {
+    [key: string]: string | number;
+}
+
 export const Field = (props: { field: block[][], setClicked: React.Dispatch<React.SetStateAction<block>> }) => {
 
     const blockCreate = (field: block[][]): JSX.Element[] => {
@@ -23,7 +27,9 @@ export const Field = (props: { field: block[][], setClicked: React.Dispatch<Reac
     }   
     const blocks = blockCreate(props.field)
 
-    return <div className={Field_module.field} style={{ '--w': `${props.field[0].length}em`, '--h': `${props.field.length}em`}}>
+    const style: CSSProperties =  {'--w': `${props.field[0].length}em`, '--h': `${props.field.length}em`}
+
+    return <div className={Field_module.field} style={style}>
         { 
             blocks
         }
