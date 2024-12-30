@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { baseField, field, generateField } from '../../js/gameplay';
-import { Field } from '../field/Field';
+import { Field } from '../Field/Field';
 import Game_module from './game.module.scss';
 import Timer from '../timer/timer';
 import { SaveBtn } from '../save-btn/save-btn';
 import { block } from '../../js/gameplay';
 
-const Game = () => {
+const levelCoef = 7
 
+const Game = () => {
 
     const [clicked, setClicked] = useState<block>()
 
@@ -17,12 +18,11 @@ const Game = () => {
 
     const [level, setLevel] = useState(1);
     const [count, setCount] = useState(2)
-    const [field, setField] = useState<field>(baseField(level*5, level*5))
+    const [field, setField] = useState<field>(baseField(level*levelCoef, level*levelCoef))
 
     const easyBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         setLevel(1)
-
     }
 
     const medBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,7 +39,7 @@ const Game = () => {
         setGameOn(false)
         setPlay(true)
         setStatus("Play")
-        setField(baseField(level * 5, level * 5))
+        setField(baseField(level * levelCoef, level * levelCoef))
     }
 
     const gameStart = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,7 +49,8 @@ const Game = () => {
             const pos = clicked ? clicked.pos : [0, 0]
             setField(generateField(field.blocks, pos))
             setCount(2)
-            console.log(clicked, pos, field, count)
+            console.log(clicked, pos, count)
+            //console.log(field)
             setGameOn(true)
         }
     }
@@ -69,16 +70,18 @@ const Game = () => {
     }
 
     const click = (block: block) => {
+
         console.group("Clicked")
-        setClicked(block)
         console.log(clicked)
         console.groupEnd()
         
         console.group("Count")      
         console.log(count)
-        setCount(count+1)
         console.log(count)
         console.groupEnd()
+        
+        setClicked(block)
+        setCount(count+1)
 
         if(field.target==count) {
             endGame("Victory!")
@@ -89,9 +92,9 @@ const Game = () => {
         }
     }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [count, clicked])
+    // }, [count, clicked])
 
     useEffect(() => {
         restart()

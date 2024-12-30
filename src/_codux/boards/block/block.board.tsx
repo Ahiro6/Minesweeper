@@ -1,5 +1,5 @@
 import { createBoard } from '@wixc3/react-board';
-import Block from '../../../components/block/Block';
+import Block from '../../../components/Block/Block';
 import { block } from '../../../js/gameplay';
 import React, { useState } from 'react';
 

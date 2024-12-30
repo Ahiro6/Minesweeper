@@ -3,6 +3,7 @@ import Block_module from './Block.module.scss';
 import { block } from '../../js/gameplay';
 
 const Block = (props: { block: block, click: any }): JSX.Element => {
+
     const [cleared, setCleared] = useState(false);
     const [flagged, setFlagged] = useState(false);
 
@@ -38,6 +39,7 @@ const Block = (props: { block: block, click: any }): JSX.Element => {
     return (
         <div onContextMenu={btnFlagged} onClick={btnCleared} className={Block_module.Squares}>
             <div className={style}>
+                {/* {props.block.pos} */}
                 {cleared ? 
                     !isBomb ? props.block.count : 'B'
                     : flagged ? 'F':

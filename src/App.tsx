@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './App.module.scss';
-import Game from './components/game/game';
+import Game from './components/Game/Game';
 
 function App() {
 

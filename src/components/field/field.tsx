@@ -1,5 +1,5 @@
 
-import Block from '../block/Block';
+import Block from '../Block/Block';
 import Field_module from './field.module.scss';
 import { block } from '../../js/gameplay';
 import { useEffect } from 'react';
@@ -13,22 +13,19 @@ export const Field = (props: { field: block[][], click: any }) => {
     const blockCreate = (field: block[][]): JSX.Element[] => {
 
         const blockArr: JSX.Element[] = []
-        for (let i = 0; i < field.length; i++) {
-            for (let j = 0; j < field[0].length; j++) {
+        for (let y = 0; y < field.length; y++) {
+            for (let x = 0; x < field[0].length; x++) {
                 const newBlock: JSX.Element = <Block
                     click={props.click}
-                    block={field[i][j]} />
-                blockArr.push(newBlock)
+                    block={field[y][x]} />
+
+                    blockArr.push(newBlock)
             }
         }
 
         return blockArr
     }
     const blocks = blockCreate(props.field)
-
-    useEffect(() => {
-
-    }, [])
 
     const style: CSSProperties = { '--w': `${props.field[0].length}em`, '--h': `${props.field.length}em` }
 

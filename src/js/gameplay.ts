@@ -49,18 +49,18 @@ const generateMines = (count: number, row: number, column: number, clicked: numb
 
 export const baseField = (row: number, column: number): field => {
 
-
     let field: block[][] = [
     ];
 
-    for (let i = 0; i < row; i++) {
+    for (let y = 0; y < column; y++) {
         field.push([])
-        for (let j = 0; j < column; j++) {
-            field[i].push({ pos: [i, j], count: 0 })
+        for (let x = 0; x < row; x++) {
+            field[y].push({ pos: [x, y], count: 0 })
         }
     }
 
     const target = 0
+
 
     return {blocks: field, target}
 }
