@@ -1,5 +1,5 @@
 
-import Block from '../Block/Block';
+import Block from '../Block_/Block';
 import Field_module from './field.module.scss';
 import { block } from '../../js/gameplay';
 import { useEffect } from 'react';
