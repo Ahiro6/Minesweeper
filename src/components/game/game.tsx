@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { baseField, field, generateField } from '../../js/gameplay';
 import { Field } from '../Field/Field';
 import Game_module from './game.module.scss';
-import Timer from '../timer/timer';
-import { SaveBtn } from '../save-btn/save-btn';
+import Timer from '../Timer/Timer';
+import { SaveBtn } from '../SaveBtn/SaveBtn';
 import { block } from '../../js/gameplay';
 
 const levelCoef = 7
