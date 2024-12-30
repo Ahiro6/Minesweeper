@@ -1,5 +1,5 @@
 import { createBoard } from '@wixc3/react-board';
-import { Field } from '../../../components/field/field';
+import { Field } from '../../../components/field/Field';
 import { baseField, block, generateField } from '../../../js/gameplay';
 import { useState } from 'react';
 

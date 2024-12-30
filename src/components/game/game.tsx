@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { baseField, generateField } from '../../js/gameplay';
-import { Field } from '../field/field';
+import { baseField, field, generateField } from '../../js/gameplay';
+import { Field } from '../field/Field';
 import Game_module from './game.module.scss';
 import Timer from '../timer/timer';
 import { SaveBtn } from '../save-btn/save-btn';
 import { block } from '../../js/gameplay';
 
 const Game = () => {
+
+
+    const [clicked, setClicked] = useState<block>()
+
+    const [gameOn, setGameOn] = useState(false)
+    const [status, setStatus] = useState('Start a game')
+    const [play, setPlay] = useState(true)
+
+    const [level, setLevel] = useState(1);
+    const [count, setCount] = useState(2)
+    const [field, setField] = useState<field>(baseField(level*5, level*5))
 
     const easyBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -21,70 +32,86 @@ const Game = () => {
 
     const hardBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        setLevel(4)
+        setLevel(3)
     }
 
     const restart = () => {
-        row = level*5
-        column = level*5
-        setField(baseField(level*5, level*5))
+        setGameOn(false)
+        setPlay(true)
+        setStatus("Play")
+        setField(baseField(level * 5, level * 5))
     }
 
-    const gameStart = (e: React.MouseEvent<HTMLDivElement>) => {
-        if(!game) {
-            console.log("start")
-            e.preventDefault()
-            setField(generateField(field, clicked.pos))
-            setGame(true)
+    const gameStart = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        if (!gameOn) {
+            setStatus('Clear the field')
+            const pos = clicked ? clicked.pos : [0, 0]
+            setField(generateField(field.blocks, pos))
+            setCount(2)
+            console.log(clicked, pos, field, count)
+            setGameOn(true)
         }
+    }
+
+    const endGame = (msg: string) => {
+        setGameOn(false)
+        setPlay(false)
+
+        setStatus(msg)
+
+        setCount(1)
     }
 
     const exit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        setGame(false)
         restart()
     }
 
-    const save = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        setGame(false)
-        restart()
-    }
+    const click = (block: block) => {
+        console.group("Clicked")
+        setClicked(block)
+        console.log(clicked)
+        console.groupEnd()
+        
+        console.group("Count")      
+        console.log(count)
+        setCount(count+1)
+        console.log(count)
+        console.groupEnd()
 
-    const [clicked, setClicked] = useState<block>({
-        pos: [-1, -1],
-        count: -1,
-        flagged: false,
-        cleared: false
-    })
-    const [game, setGame] = useState(false)
-    const [level, setLevel] = useState(1);
-    let row = level*5
-    let column = level*5
-    const [field, setField] = useState(baseField(row, column))
+        if(field.target==count) {
+            endGame("Victory!")
+        }
+
+        else if(block.count >= 10) {
+            endGame("Game Over!")
+        }
+    }
 
     useEffect(() => {
-        if(!game) {
-            restart()
-        }
-        console.log("refreshed")
-    }, [level, game])
+
+    }, [count, clicked])
+
+    useEffect(() => {
+        restart()
+    }, [level])
 
     return (
         <div className={Game_module.game}>
             <div className={Game_module['board-top']}>
                 <div className={Game_module.modes_panel}>
-                    <button disabled={game} onClick={easyBtn} className={Game_module.mode_btn}>Easy</button>
-                    <button disabled={game} onClick={medBtn} className={Game_module.mode_btn}>Medium</button>
-                    <button disabled={game} onClick={hardBtn} className={Game_module.mode_btn}>Hard</button>
+                    <button disabled={gameOn} onClick={easyBtn} className={Game_module.mode_btn}>Easy</button>
+                    <button disabled={gameOn} onClick={medBtn} className={Game_module.mode_btn}>Medium</button>
+                    <button disabled={gameOn} onClick={hardBtn} className={Game_module.mode_btn}>Hard</button>
                 </div>
-                <Timer />
-                <button onClick={exit}>Quit</button>
-                <button onClick={save}>Save</button> 
+                <Timer gameOn={gameOn} play={play}/>
+                <button onClick={exit}>Restart</button>
+                <h4>{status}</h4>
             </div>
-            <div onClick={gameStart} className={Game_module.board}>
-                <Field setClicked={setClicked} field={field}></Field>
-            </div>
+            <button disabled={!gameOn && !play} onClick={gameStart} className={Game_module.board}>
+                <Field field={field.blocks} click={click}></Field>
+            </button>
         </div>
     );
 };
