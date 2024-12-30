@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Timer_module from './timer.module.scss';
+import Timer_module from './Timer.module.scss';
 
 const Timer = (props: {gameOn: boolean, play:boolean}) => {
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { baseField, field, generateField } from '../../js/gameplay';
 import { Field } from '../Field_/Field';
-import Game_module from './game.module.scss';
+import Game_module from './Game.module.scss';
 import Timer from '../Timer_/Timer';
 import { block } from '../../js/gameplay';
 
